@@ -20,7 +20,7 @@ def decode(license: str) -> (str, int, [int]):
             return sort(license), previous, counts
         previous += math.prod(counts)
 
-# Colocar numeros à direira já que é o primeiro a ser contando, mantendo a ordem de tudo
+# Colocar os numeros à direira, já que é o primeiro a ser contando, mantendo a ordem de tudo
 def order(license: str) -> int:
     # print("license={0}".format(license))
     license, previous, counts = decode(license)

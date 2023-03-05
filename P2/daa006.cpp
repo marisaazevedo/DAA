@@ -27,7 +27,7 @@ double resolucao (double qx, double qy, double ql, double cx, double cy, double 
 
 
 
-    else if(ql >= 0.001) { // esta mal, tentar perceber depois !!!
+    else if(ql >= 0.001) { // MAL -> tentar perceber depois !!!
         ql /= 2;
         intersecao += resolucao(qx,  qy,  ql, cx, cy, cr);
 		intersecao += resolucao(qx2, qy,  ql, cx, cy, cr);

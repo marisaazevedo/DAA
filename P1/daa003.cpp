@@ -14,7 +14,7 @@ int generation(string matricula) {
 	}
 	else {
 		if (isalpha(matricula[7])) return cases * 1; // Geração 2
-		else return cases *2 ; // Geração 3
+		else return cases * 2 ; // Geração 3
 	}
 }
 
