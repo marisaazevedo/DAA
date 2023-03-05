@@ -1,6 +1,5 @@
 import math
 import re
-import string
 
 formats = {
     "^[A-Z]{2}-[0-9]{2}-[0-9]{2}$": [23, 23, 10, 10, 10, 10],
@@ -21,6 +20,7 @@ def decode(license: str) -> (str, int, [int]):
             return sort(license), previous, counts
         previous += math.prod(counts)
 
+# Colocar numeros à direira já que é o primeiro a ser contando, mantendo a ordem de tudo
 def order(license: str) -> int:
     # print("license={0}".format(license))
     license, previous, counts = decode(license)

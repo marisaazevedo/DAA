@@ -13,21 +13,21 @@ double resolucao (double qx, double qy, double ql, double cx, double cy, double 
 	double cy2 = cy + cr; // posicao superior
     double intersecao = 0;
 
-    if(cx1 >= qx && cx2 <= qx2 && cy1 >= qy && cy2 <= qy2) {
+    if(cx1 > qx && cx2 < qx2 && cy1 > qy && cy2 < qy2) {
         return M_PI * cr * cr;
     } // circulo dentro do quadrado
 
-    else if((qx - cx) * (qx - cx) + (qy - cy) * (qy - cy) <= cr * cr && (qx - cx) * (qx - cx) + (qy2 - cy) * (qy2 - cy) <= cr * cr && (qx2 - cx) * (qx2 - cx) + (qy - cy) * (qy - cy) <= cr * cr && (qx2 - cx) * (qx2 - cx) + (qy2 - cy) * (qy2 - cy) <= cr * cr) {
+    else if((qx - cx) * (qx - cx) + (qy - cy) * (qy - cy) < cr * cr && (qx - cx) * (qx - cx) + (qy2 - cy) * (qy2 - cy) < cr * cr && (qx2 - cx) * (qx2 - cx) + (qy - cy) * (qy - cy) < cr * cr && (qx2 - cx) * (qx2 - cx) + (qy2 - cy) * (qy2 - cy) < cr * cr) {
         return ql * ql;
     } // quadrado dentro do circulo
 
-    else if(cx2 <= qx || cx1 >= qx2 || cy2 <= qy || cy1 >= qy2) {
+    else if(cx2 < qx || cx1 > qx2 || cy2 < qy || cy1 > qy2) {
         return 0;
     } // uma figura está garantidamente fora da outra
 
 
 
-    else if(ql >= 0.001) {
+    else if(ql >= 0.001) { // esta mal, tentar perceber depois !!!
         ql /= 2;
         intersecao += resolucao(qx,  qy,  ql, cx, cy, cr);
 		intersecao += resolucao(qx2, qy,  ql, cx, cy, cr);
