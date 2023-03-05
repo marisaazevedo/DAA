@@ -1,30 +1,44 @@
 #include <iostream>
 #include <string>
 #include <ctype.h>
+#include <stdlib.h>
 
 using namespace std;
 
-int diferenca_matriculas(string m1, string m2) {
-    int diferenca = 0;
-    if(geracao(m1) == geracao(m2)) {
+int generation(string matricula) {
+    int cases =  10 * 10 * 10 * 10 * 23 * 23;
 
-    }
-    return diferenca;
+	if (isalpha(matricula[0])) {
+		if (isalpha(matricula[7])) return cases * 3; // Geração 4
+		else return 0; // Geração 1
+	}
+	else {
+		if (isalpha(matricula[7])) return cases * 1; // Geração 2
+		else return cases *2 ; // Geração 3
+	}
 }
 
-int geracao(matricula) {
-    if(isalpha(matricula[0]) && isalpha(matricula[1]) && isdigit(matricula[3]) && isdigit(matricula[4]) && isdigit(matricula[6]) && isdigit(matricula[7])) {
-        return 1;
-    }
-    else if(isdigit(matricula[0]) && isdigit(matricula[1]) && isdigit(matricula[3]) && isdigit(matricula[4]) && isalpha(matricula[6]) && isalpha(matricula[7])) {
-        return 2;
-    }
-    else if(isdigit(matricula[0]) && isdigit(matricula[1]) && isalpha(matricula[3]) && isalpha(matricula[4]) && isdigit(matricula[6]) && isdigit(matricula[7])) {
-        return 3;
-    }
-    else {
-        return 4;
-    }
+int solve(string matricula) {
+	int base = 1;
+	int difference = generation(matricula);
+
+	for (int i = 7; i >= 0; i--) {
+		if (isdigit(matricula[i])) {
+			difference += (matricula[i] - '0') * base ;
+			base *= 10;
+		}
+	}
+	for (int i = 7; i >= 0; i--) {
+		if (isalpha(matricula[i])) {
+			int value = matricula[i] - 'A';
+			if (matricula[i] > 'K') value--;
+			if (matricula[i] > 'W') value--;
+			if (matricula[i] > 'Y') value--;
+			difference += value * base;
+			base *= 23;
+		}
+	}
+	return difference;
 }
 
 int main() {
@@ -34,6 +48,6 @@ int main() {
 
     for(int i = 0; i < T; i++) {
         cin >> matricula_1 >> matricula_2;
-        cout << diferenca_matriculas(matricula_1, matricula_2) << endl;
+        cout << abs(solve(matricula_2) - solve(matricula_1)) << endl;
     }
 }
