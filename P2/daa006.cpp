@@ -14,7 +14,7 @@ double resolucao (double qx1, double qy1, double ql, double cx, double cy, doubl
 	double cy2 = cy + cr;  // posicao superior
     double intersecao = 0;
 
-    if(((qx1 - cx) * (qx1 - cx) + (qy1 - cy) * (qy1 - cy) > cr * cr) && ((qx1 - cx) * (qx1 - cx) + (qy2 - cy) * (qy2 - cy) > cr * cr) && ((qx2 - cx) * (qx2 - cx) + (qy1 - cy) * (qy1 - cy) > cr * cr) && ((qx2 - cx) * (qx2 - cx) + (qy2 - cy) * (qy2 - cy) > cr * cr) && (!(cx > qx1 && cx < qx2)) && (!(cy > qy1 && cy < qy2))) {
+    if(cx1 > qx2 || cy1 > qy2 || cx2 < qx1 || cy2 < qy1) {
         // uma figura está garantidamente fora da outra
         return 0;
     }
