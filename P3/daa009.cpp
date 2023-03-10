@@ -1,32 +1,43 @@
 #include <iostream>
 #include <string>
-#include<set>
+#include <algorithm>
 
 using namespace std;
 
-int contagem(string dna, int n) {
-    set<char> visitados;
+typedef struct {
+    char letra;
+    int freq;
+} DNA;
 
-    for(int i = 0; i < n; i++) {
-        if(visitados.find(dna[i])) {
-            continue;
-        }
-        visitados.insert(dna[i]);
-        int contador = 0;
-        for(int j = i + 1; j < n; j++) {
-            if (dna[i] == dna[i]) {
-                contador++;
-            }
-        }
-        cout << dna[i], contador << endl;
+struct compareDNA {
+    bool operator()(const DNA & p1, const DNA & p2) {
+        if (p1.freq < p2.freq) return true;
+        if (p1.freq > p2.freq) return false;
+        return 0;
     }
-    return 0;
-}
-
-using namespace std;
+};
 
 int main() {
+    DNA lista[26];
     string dna;
+
+    for(int i = 0 ; i < 26 ; i++) {
+		lista[i].letra = 'A' + i ;
+		lista[i].freq = 0;
+	}
+
     cin >> dna;
-    contagem(dna, sizeof(dna));
+    int size = dna.size();
+
+    for(int i = 0; i < size; i++) {
+        lista[dna[i] - 'A'].freq++;
+    }
+
+    sort(lista, lista + size, compareDNA());
+
+    for(int i = 0; i < size; i++) {
+        if(lista[i].freq != 0) {
+            cout << lista[i].letra << " " << lista[i].freq << endl;
+        }
+    }
 }
